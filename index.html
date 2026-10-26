@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="tk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Songs Karaoke</title>
+    <style>
+        body {
+            background-color: #0b1d12;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 { color: #2ecc71; font-size: 28px; }
+        .container {
+            background: #112d1c;
+            border: 2px solid #2ecc71;
+            border-radius: 15px;
+            padding: 20px;
+            max-width: 500px;
+            margin: 20px auto;
+        }
+        .lyrics-box {
+            font-size: 24px;
+            font-weight: bold;
+            color: #f1c40f;
+            margin: 20px 0;
+            min-height: 60px;
+        }
+        .audio-player {
+            width: 100%;
+            margin-top: 10px;
+        }
+        .btn {
+            background-color: #2ecc71;
+            color: black;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Global Songs Karaoke</h1>
+    <p>Uzbegistan we bütin dünýä üçin sanksiýasyz, ýeňil karaoke ulgamy</p>
+
+    <div class="container">
+        <!-- Bu ýere internetdäki islendik ýeňil klip ýa-da minus audio salgysy goýulýar -->
+        <audio id="karaokeAudio" class="audio-player" controls>
+            <source src="https://soundhelix.com" type="audio/mp3">
+            Brauzeriňiz bu sazy goldamaýar.
+        </audio>
+        
+        <!-- Ekranda aýdym aýdylýarka gaýtalanmaly sözler -->
+        <div class="lyrics-box" id="lyricsText">Sazy başladanyňyzda sözler şu ýerde peýda bolar...</div>
+    </div>
+
+    <button class="btn" onclick="startSinging()">Sazy Başlat</button>
+
+    <script>
+        const audio = document.getElementById('karaokeAudio');
+        const lyrics = document.getElementById('lyricsText');
+
+        // Sazyň sekuntlaryna görä ekrandaky sözleri awtomatiki üýtgetmek
+        audio.ontimeupdate = function() {
+            let sec = Math.floor(audio.currentTime);
+            
+            if (sec >= 1 && sec < 5) {
+                lyrics.innerHTML = "🎵 Ýyldyzly gije, owadan mukam... 🎵";
+            } else if (sec >= 5 && sec < 10) {
+                lyrics.innerHTML = "🎤 Dostlar bilen bile aýdylýan aýdym! 🎤";
+            } else if (sec >= 10 && sec < 15) {
+                lyrics.innerHTML = "✨ 8 milliard adam sanksiýasyz diňlesin! ✨";
+            } else if (sec >= 15) {
+                lyrics.innerHTML = "🎶 Karaoke dowam edýär... 🎶";
+            }
+        };
+
+        function startSinging() {
+            audio.play();
+        }
+    </script>
+</body>
+</html>
